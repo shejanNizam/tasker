@@ -1,11 +1,16 @@
 import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   return (
     <>
-      <div className="text-2xl font-bold text-purple-500">
-        Hello from tasker
+      <Header />
+      <div className="flex justify-center items-center">
+        <HeroSection />
       </div>
+      <Footer />
     </>
   );
 }
