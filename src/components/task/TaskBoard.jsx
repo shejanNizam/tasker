@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddTaskModal from "./AddTaskModal";
 import SearchTask from "./SearchTask";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
@@ -15,10 +16,19 @@ export default function TaskBoard() {
   };
 
   const [tasks, setTasks] = useState([initialTask]);
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+
+  const handleAddTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+    setShowAddTaskModal(false);
+    console.log("Adding a task...");
+  };
 
   return (
     <>
       <section className="mb-20" id="tasks">
+        {showAddTaskModal && <AddTaskModal onSave={handleAddTask} />}
+
         <div className="container">
           <div className="p-2 flex justify-end">
             <SearchTask />
@@ -26,7 +36,7 @@ export default function TaskBoard() {
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             {/* task actions */}
-            <TaskActions />
+            <TaskActions onAddTask={() => setShowAddTaskModal(true)} />
 
             {/* task lists */}
             <TaskList tasks={tasks} setTasks={setTasks} />
