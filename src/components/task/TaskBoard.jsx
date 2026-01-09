@@ -11,23 +11,46 @@ export default function TaskBoard() {
     description:
       "This is simple description for task This is simple description for task This is simple description for task",
     tags: ["app", "react", "native"],
-    priority: "high",
+    priority: "High",
     isFavourite: true,
   };
 
   const [tasks, setTasks] = useState([initialTask]);
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
+  // console.log(taskToUpdate);
 
-  const handleAddTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+  const handleAddEditTask = (newTask, isAdd) => {
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === newTask.id) {
+            return newTask;
+          } else {
+            return task;
+          }
+        })
+      );
+    }
     setShowAddTaskModal(false);
-    console.log("Adding a task...");
+  };
+
+  const handleEditTask = (task) => {
+    setTaskToUpdate(task);
+    setShowAddTaskModal(true);
   };
 
   return (
     <>
       <section className="mb-20" id="tasks">
-        {showAddTaskModal && <AddTaskModal onSave={handleAddTask} />}
+        {showAddTaskModal && (
+          <AddTaskModal
+            onSave={handleAddEditTask}
+            taskToUpdate={taskToUpdate}
+          />
+        )}
 
         <div className="container">
           <div className="p-2 flex justify-end">
@@ -39,7 +62,7 @@ export default function TaskBoard() {
             <TaskActions onAddTask={() => setShowAddTaskModal(true)} />
 
             {/* task lists */}
-            <TaskList tasks={tasks} setTasks={setTasks} />
+            <TaskList tasks={tasks} onEdit={handleEditTask} />
           </div>
         </div>
       </section>
