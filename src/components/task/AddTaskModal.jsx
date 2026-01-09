@@ -105,14 +105,14 @@ export default function AddTaskModal({ onSave, taskToUpdate, onCloseClick }) {
 
         <div className="mt-10 flex justify-between">
           <button
-            className="rounded bg-red-600 px-6 py-2 text-white hover:opacity-80"
+            className="rounded bg-red-600 px-6 py-2 text-white hover:opacity-80 cursor-pointer"
             onClick={onCloseClick}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="rounded bg-blue-600 px-6 py-2 text-white hover:opacity-80"
+            className="rounded bg-blue-600 px-6 py-2 text-white hover:opacity-80 cursor-pointer"
             onClick={() => onSave(task, isAdd)}
           >
             Save

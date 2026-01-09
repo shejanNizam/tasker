@@ -42,9 +42,26 @@ export default function TaskBoard() {
     setShowAddTaskModal(true);
   };
 
+  const handleDeleteTask = (id) => {
+    const tasksAfterDelete = tasks.filter((task) => task.id !== id);
+    setTasks(tasksAfterDelete);
+  };
+
   const handleCloseClick = () => {
     setShowAddTaskModal(false);
     setTaskToUpdate(null);
+  };
+
+  const handleFavourite = (id) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, isFavourite: !task.isFavourite };
+        } else {
+          return task;
+        }
+      })
+    );
   };
 
   return (
@@ -68,7 +85,12 @@ export default function TaskBoard() {
             <TaskActions onAddTask={() => setShowAddTaskModal(true)} />
 
             {/* task lists */}
-            <TaskList tasks={tasks} onEdit={handleEditTask} />
+            <TaskList
+              tasks={tasks}
+              onEdit={handleEditTask}
+              onDelete={handleDeleteTask}
+              onFav={handleFavourite}
+            />
           </div>
         </div>
       </section>
