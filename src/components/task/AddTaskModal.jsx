@@ -13,6 +13,7 @@ export default function AddTaskModal({ onSave, taskToUpdate, onCloseClick }) {
   );
 
   const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null));
+  console.log(setIsAdd);
 
   const handleChange = (e) => {
     const name = e.target.name;

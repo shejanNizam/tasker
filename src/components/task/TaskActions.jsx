@@ -1,4 +1,4 @@
-export default function TaskActions({ onAddTask }) {
+export default function TaskActions({ onAddTask, onDeleteAllClick }) {
   return (
     <div>
       <div className="mb-14 items-center justify-between sm:flex">
@@ -10,7 +10,10 @@ export default function TaskActions({ onAddTask }) {
           >
             Add Task
           </button>
-          <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold cursor-pointer">
+          <button
+            onClick={onDeleteAllClick}
+            className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold cursor-pointer"
+          >
             Delete All
           </button>
         </div>

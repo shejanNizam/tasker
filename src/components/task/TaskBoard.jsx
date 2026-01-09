@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AddTaskModal from "./AddTaskModal";
+import NoTaskFound from "./NoTaskFound";
 import SearchTask from "./SearchTask";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
@@ -72,6 +73,10 @@ export default function TaskBoard() {
     setTasks([...filteredTasks]);
   };
 
+  const handleDeleteAllClick = () => {
+    setTasks([]);
+  };
+
   return (
     <>
       <section className="mb-20" id="tasks">
@@ -90,15 +95,22 @@ export default function TaskBoard() {
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             {/* task actions */}
-            <TaskActions onAddTask={() => setShowAddTaskModal(true)} />
+            <TaskActions
+              onAddTask={() => setShowAddTaskModal(true)}
+              onDeleteAllClick={handleDeleteAllClick}
+            />
 
             {/* task lists */}
-            <TaskList
-              tasks={tasks}
-              onEdit={handleEditTask}
-              onDelete={handleDeleteTask}
-              onFav={handleFavourite}
-            />
+            {tasks.length > 0 ? (
+              <TaskList
+                tasks={tasks}
+                onEdit={handleEditTask}
+                onDelete={handleDeleteTask}
+                onFav={handleFavourite}
+              />
+            ) : (
+              <NoTaskFound />
+            )}
           </div>
         </div>
       </section>
