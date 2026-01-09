@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddTaskModal({ onSave, taskToUpdate }) {
+export default function AddTaskModal({ onSave, taskToUpdate, onCloseClick }) {
   const [task, setTask] = useState(
     taskToUpdate || {
       id: crypto.randomUUID(),
@@ -103,7 +103,13 @@ export default function AddTaskModal({ onSave, taskToUpdate }) {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex justify-between">
+          <button
+            className="rounded bg-red-600 px-6 py-2 text-white hover:opacity-80"
+            onClick={onCloseClick}
+          >
+            Cancel
+          </button>
           <button
             type="submit"
             className="rounded bg-blue-600 px-6 py-2 text-white hover:opacity-80"

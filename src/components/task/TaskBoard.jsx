@@ -42,6 +42,11 @@ export default function TaskBoard() {
     setShowAddTaskModal(true);
   };
 
+  const handleCloseClick = () => {
+    setShowAddTaskModal(false);
+    setTaskToUpdate(null);
+  };
+
   return (
     <>
       <section className="mb-20" id="tasks">
@@ -49,6 +54,7 @@ export default function TaskBoard() {
           <AddTaskModal
             onSave={handleAddEditTask}
             taskToUpdate={taskToUpdate}
+            onCloseClick={handleCloseClick}
           />
         )}
 

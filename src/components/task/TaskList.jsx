@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa";
 
 export default function TaskList({ tasks, onEdit }) {
-  console.log(tasks);
+  // console.log(tasks);
   return (
     <div>
       <div className="overflow-auto">
